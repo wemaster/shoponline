@@ -1,0 +1,51 @@
+﻿@model PagedList.IPagedList<ShopOnline.Models.TblAccount>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Mod";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var ViewInfo = (List<ShopOnline.code.AccountViewModel>)ViewBag.ViewInfo;
+}
+
+<div class="row">
+    <!--right colum-->
+    <div class="col-md-8">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Danh sách quản trị viên</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên</th>
+                        <th>Ngày Tạo</th>
+                        <th>Loại tài khoản</th>
+                        <th>Số Điện thoại</th>
+                    </tr>
+                    @foreach (var item in ViewInfo)
+                    {
+                        <tr>
+                            <td>@item.IDAcc</td>
+                            <td>@item.NameAcc</td>
+                            <td>@Html.DisplayFor(modelItem => item.DayRegister)</td>
+                            <td><span class="label label-success">@item.NamePer</span></td>
+                            <td>@item.SDT</td>
+                            <td>
+                                <a href="/Account/Edit/@item.IDAcc">Sửa</a> |
+                                @Ajax.ActionLink("Xóa", "Delete", new AjaxOptions { Confirm = "Bạn có muốn xóa tài khoản " + @item.NameAcc + " này?", OnComplete = "$('row_" + @item.IDAcc + "').remove()", HttpMethod = "Delete" })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+                <div class="col-sm-7">
+                    @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+<!-- /.row -->

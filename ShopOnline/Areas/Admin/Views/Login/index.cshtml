@@ -1,0 +1,92 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model ShopOnline.Models.LoginModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Login Page</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="stylesheet" href="~/Assets/client/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/client/css/login.css" />
+    <link rel="stylesheet" href="~/Assets/client/magic/magic.css" />
+    <link href="~/Assets/iCheck/all.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- PAGE CONTENT -->
+    <div class="container">
+        <div class="text-center">
+            @*<img src="assets/img/logo.png" id="logoimg" alt=" Logo" />*@
+        </div>
+        <div class="tab-content">
+            <div id="login" class="tab-pane active">
+                <div class="form-signin">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.ValidationMessage("error", new { @class = "text-danger" })
+                        <p class="text-muted text-center btn-block btn btn-primary btn-rect">
+                            Login
+                        </p>
+                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Tên đăng nhập" })
+                        <p>@Html.ValidationMessageFor(m => m.Username, null, new { @class = "text-danger" })</p>
+                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", type = "password", @placeholder = "Password" })
+                        <p>@Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })</p>
+                        <label>
+                            @Html.TextBoxFor(x => x.Remember, new { @class = "minimal-red", type = "checkbox" }) Nhớ đăng nhập
+                        </label>
+                        <button class="btn text-muted text-center btn-danger" type="submit">Đăng nhập</button>
+                    }
+                </div>
+            </div>
+            <div id="forgot" class="tab-pane">
+                <form action="index.html" class="form-signin">
+                    <p class="text-muted text-center btn-block btn btn-primary btn-rect">Enter your valid e-mail</p>
+                    <input type="email" required="required" placeholder="Your E-mail" class="form-control" />
+                    <br />
+                    <button class="btn text-muted text-center btn-success" type="submit">Recover Password</button>
+                </form>
+            </div>
+            <div id="signup" class="tab-pane">
+                <form action="index.html" class="form-signin">
+                    <p class="text-muted text-center btn-block btn btn-primary btn-rect">Please Fill Details To Register</p>
+                    <input type="text" placeholder="First Name" class="form-control" />
+                    <input type="text" placeholder="Last Name" class="form-control" />
+                    <input type="text" placeholder="Username" class="form-control" />
+                    <input type="email" placeholder="Your E-mail" class="form-control" />
+                    <input type="password" placeholder="password" class="form-control" />
+                    <input type="password" placeholder="Re type password" class="form-control" />
+                    <button class="btn text-muted text-center btn-success" type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="list-inline">
+                <li><a class="text-muted" href="#login" data-toggle="tab">Login</a></li>
+                <li><a class="text-muted" href="#forgot" data-toggle="tab">Forgot Password</a></li>
+                <li><a class="text-muted" href="#signup" data-toggle="tab">Signup</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <!--END PAGE CONTENT -->
+    <!-- PAGE LEVEL SCRIPTS -->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Assets/client/js/login.js"></script>
+    <script src="~/Assets/client/js/bootstrap.js"></script>
+    <script src="~/Assets/iCheck/icheck.min.js"></script>
+    <script>
+        $(function () {
+            //Red color scheme for iCheck
+            $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+                checkboxClass: 'icheckbox_minimal-red',
+                radioClass: 'iradio_minimal-red'
+            })
+        })
+    </script>
+</body>
+</html>

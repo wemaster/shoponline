@@ -1,0 +1,150 @@
+﻿@model List<ShopOnline.Models.CartModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+<script src="~/Assets/client/js/cart.js"></script>
+ }
+
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>Chi tiết giỏ hàng</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End Page title area -->
+
+
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="single-sidebar">
+                    <h2 class="sidebar-title">Tìm kiếm sản phẩm</h2>
+                    <form action="#">
+                        <input type="text" placeholder="Tìm kiếm....">
+                        <input type="submit" value="Tìm">
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="product-content-right">
+                    <div class="woocommerce">
+                        @using (Html.BeginForm("Update","Cart"))
+                       {
+                            if (Model.Count > 0)
+                            {
+                                <table cellspacing="0" class="shop_table cart">
+                                    <thead>
+                                        <tr>
+                                            <th class="product-remove">&nbsp;</th>
+                                            <th class="product-thumbnail">&nbsp;</th>
+                                            <th class="product-name">Tên sản phẩm</th>
+                                            <th class="product-price">Giá gốc</th>
+                                            <th class="product-price">Giá khuyến mãi</th>
+                                            <th class="product-quantity">Số lượng</th>
+                                            <th class="product-subtotal">Thành tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr class="cart_item">
+                                                <td class="product-remove">
+                                                    <a title="Remove this item" data-id="@item.ProductID.IDSP" class="remove" href="#">×</a>
+                                                </td>
+
+                                                <td class="product-thumbnail">
+                                                    <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="~/@item.ProductID.Img"></a>
+                                                </td>
+
+                                                <td class="product-name">
+                                                    <a href="single-product.html">@item.ProductID.NameSP</a>
+                                                </td>
+
+                                                <td class="product-price">
+                                                    <span class="amount">@item.ProductID.Price.GetValueOrDefault(0).ToString("N0")</span>
+                                                </td>
+                                                <td class="product-price">
+                                                    <span class="amount">@item.ProductID.Promotion.GetValueOrDefault(0).ToString("N0")</span>
+                                                </td>
+                                                <td class="product-quantity">
+                                                    <div class="quantity buttons_added">
+                                                        <input type="number" size="4" name="quantity" class="input-text qty text" title="Qty" value="@item.Quantity" min="0" step="1">
+                                                    </div>
+                                                </td>
+                                                <td class="product-subtotal">
+                                                    <span class="amount">@((item.TotalPay).ToString("N0")) VNĐ</span>
+                                                </td>
+                                            </tr>
+                                        }
+                                        <tr>
+                                            <td class="actions" colspan="10">
+                                                <div class="coupon">
+                                                    <label for="coupon_code">Mã khuyến mãi:</label>
+                                                    <input type="text" placeholder="Mã khuyến mãi" value="" id="coupon_code" class="input-text" name="coupon_code">
+                                                    <button id="btngiftcode" class="btn btn-warning" type="submit">
+                                                        <span class="glyphicon glyphicon-send"></span> Áp dụng
+                                                    </button>
+                                                </div>
+                                                <button id="btnUpdate" class="btn btn-primary" type="submit">
+                                                    <span class="glyphicon glyphicon-refresh"></span> Cập nhật số lượng
+                                                </button>
+                                                <button id="btnpayment" class="btn btn-primary" type="submit">
+                                                    <span class="fa fa-cc-visa"></span> Thanh Toán
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    <p class="alert alert-danger"><i class="fa fa-spinner fa-spin"></i> Chưa có sản phẩm trong giỏ hàng. Vui lòng bấm chọn mua hàng.</p>
+                                </div>
+                            }
+
+                        }
+                        <button id="btncontinue" onclick="location.href='/';" class="btn btn-primary" type="submit">
+                            <span class="glyphicon glyphicon-shopping-cart"></span> Tiếp tục mua hàng
+                        </button>
+                        <div class="cart-collaterals">
+                            <div class="cart_totals ">
+                                <h2>Hóa Đơn Thanh Toán</h2>
+                                <table cellspacing="0">
+                                    <tbody>
+                                        <tr class="cart-subtotal">
+                                            <th>Thành tiền</th>
+                                            <td class="product-subtotal">
+                                                <span class="amount">@(Model.Sum(x => x.TotalPay).ToString("N0")) VNĐ</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="shipping">
+                                            <th>Phí thanh toán:</th>
+                                            <td>Miễn phí giao hàng</td>
+                                        </tr>
+
+                                        <tr class="order-total">
+                                            <th>Tổng tiền phải thanh toán: </th>
+                                            <td class="product-subtotal">
+                                                <strong><span class="amount">@(Model.Sum(x => x.TotalPay).ToString("N0")) VNĐ</span></strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

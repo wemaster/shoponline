@@ -1,0 +1,29 @@
+﻿@model List<ShopOnline.Models.TblCategory>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Danh sách loại sản phẩm</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+            <tr>
+                <th>ID Loại</th>
+                <th>Tên loại</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+             {
+            <tr>
+                <td>@item.IDCate</td>
+                <td>@item.NameCate</td>
+                <td>Thêm Sửa Xóa </td>
+            </tr>
+            }
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>

@@ -1,0 +1,55 @@
+﻿@model ShopOnline.Models.TblAccount
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+    <!-- left column -->
+<div class="col-md-8">
+    <!-- general form elements -->
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Thêm Tài khoản- Khách Hàng</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+            <div class="box-body">
+                @Html.ValidationMessage("error", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label for="exampleInputEmail1"></label>
+                    @Html.LabelFor(model => model.NameAcc)
+                    @Html.TextBoxFor(model => model.NameAcc, new { @class = "form-control", @placeholder = "Nhập tên" })
+                    <p class="help-block">@Html.ValidationMessageFor(model => model.NameAcc, null, new { @class = "text-danger" })</p>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PassAcc)
+                    @Html.TextBoxFor(model => model.PassAcc, new { @class = "form-control", @placeholder = "Nhập mật khẩu",type="password" })
+                    <p class="help-block">@Html.ValidationMessageFor(model => model.PassAcc, null, new { @class = "text-danger" })</p>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model=> model.IDPer)
+                    @Html.TextBoxFor(model => model.IDPer, new { @class = "form-control", @placeholder = "Chọn quyền" })
+                    <p class="help-block">@Html.ValidationMessageFor(model => model.IDPer, null, new { @class = "text-danger" })</p>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SDT)
+                    @Html.TextBoxFor(model => model.SDT, new { @class = "form-control", @placeholder = "Nhập số ĐT" })
+                    <p class="help-block">@Html.ValidationMessageFor(model => model.SDT, null, new { @class = "text-danger" })</p>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DayReg)
+                    @Html.TextBoxFor(model => model.DayReg, new { @class = "form-control pull-right", @type = "date" })
+                </div>
+            </div>
+                <!-- /.box-body -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Thêm</button>
+            </div>
+            }
+
+    </div>
+    <!-- /.box -->
+</div>

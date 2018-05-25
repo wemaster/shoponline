@@ -1,0 +1,208 @@
+﻿
+@{
+    ViewBag.Title = "Trang chủ";
+    var slides = (List<ShopOnline.Models.TblBanner>)ViewBag.slide;
+    var ProductNew = (List<ShopOnline.Models.TblProduct>)ViewBag.NewProduct;
+    var ProhotView = (List<ShopOnline.Models.TblProduct>)ViewBag.LitsTopView;
+    var ProhotSell = (List<ShopOnline.Models.TblProduct>)ViewBag.LitsTopSell;
+    var Prohotyasui = (List<ShopOnline.Models.TblProduct>)ViewBag.LitsTopYasui;
+}
+
+<div class="slider-area">
+    <!-- Slider -->
+    <div class="block-slider block-slider4">
+        <ul class="" id="bxslider-home4">
+            @foreach(var item in slides)
+            { 
+            <li>
+                <img src="~/@item.Img" alt="Slide">
+                <div class="caption-group">
+                    <h2 class="caption title">
+                        <strong> @item.Detail</strong>
+                    </h2>
+                    <h4 class="caption subtitle">@item.NameBaner</h4>
+                    <a class="caption button-radius" href="@item.Link"><span class="icon"></span>Mua ngay</a>
+                </div>
+            </li>
+            }
+        </ul>
+    </div>
+    <!-- ./Slider -->
+</div> <!-- End slider area -->
+
+<div class="product-widget-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="product-item">
+                    <h2 class="product-wid-title">Top Khuyến mãi</h2>
+                    @foreach (var item in ProhotSell)
+                    {
+                        var urldetail = "/san-pham/" + item.Metatitle + "-" + item.IDSP;
+                        var url = "/chi-tiet/" + item.Metatitle + "-" + item.IDSP;
+                     <a href="@urldetail" class="wid-view-more">Xem thêm</a>
+                    <div class="single-wid-product">
+                        <a href="@url"><img src="~/@item.Img" alt="@item.Metakeywords" class="product-thumb"></a>
+                        <h2><a href="@url">@item.NameSP</a></h2>
+                        <div class="product-wid-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <div class="product-wid-price">
+                            <ins>@(item.Promotion.HasValue? item.Promotion.Value.ToString("N0"):"" )</ins> <del>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</del>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single-product-widget">
+                    <h2 class="product-wid-title">Sản phẩm siêu rẻ</h2>
+                    @foreach (var item in Prohotyasui)
+                    {
+                       var urldetail = "/san-pham/" + item.Metatitle + "-" + item.IDSP;
+                        var url = "/chi-tiet/" + item.Metatitle + "-" + item.IDSP;
+                        <a href="@urldetail" class="wid-view-more">Xem thêm</a>
+                        <div class="single-wid-product">
+                            <a href="@url"><img src="~/@item.Img" alt="@item.Metakeywords" class="product-thumb"></a>
+                            <h2><a href="@url">@item.NameSP</a></h2>
+                            <div class="product-wid-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product-wid-price">
+                                <ins>@(item.Promotion.HasValue ? item.Promotion.Value.ToString("N0") : "")</ins> <del>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</del>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single-product-widget">
+                    <h2 class="product-wid-title">Hàng mua nhiều</h2>
+                    @foreach (var item in ProhotView)
+                    {
+                        var urldetail = "/san-pham/" + item.Metatitle + "-" + item.IDSP;
+                        var url = "/chi-tiet/" + item.Metatitle + "-" + item.IDSP;
+                     <a href="@urldetail" class="wid-view-more">Xem thêm</a>
+                        <div class="single-wid-product">
+                            <a href="@url"><img src="~/@item.Img" alt="@item.Metakeywords" class="product-thumb"></a>
+                            <h2><a href="@url">@item.NameSP</a></h2>
+                            <div class="product-wid-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product-wid-price">
+                                <ins>@(item.Promotion.HasValue ? item.Promotion.Value.ToString("N0") : "")</ins> <del>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</del>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End product widget area -->
+
+<div class="maincontent-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="latest-product">
+                    <h2 class="section-title">Sản phẩm mới</h2>
+                    <div class="product-carousel">
+                        @foreach (var item in ProductNew)
+                        {
+                            var url = "/chi-tiet/" + item.Metatitle + "-" + item.IDSP;
+                            <div class="single-product">
+                                <div class="product-f-image">
+                                    <img src="~/@item.Img" alt="@item.Metakeywords">
+                                    <div class="product-hover">
+                                        <a href="/add-cart?productId=@item.IDSP&quantiy=1" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua hàng</a>
+                                        <a href="@url" class="view-details-link"><i class="fa fa-link"></i>Chi tiết</a>
+                                    </div>
+                                </div>
+                                <h2><a href="@url">@item.NameSP</a></h2>
+
+                                <div class="product-carousel-price">
+                                    @if (item.Promotion != null)
+                                    {
+                                        <del>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ") đ</del> <ins>Giá : @(item.Promotion.HasValue ? item.Promotion.Value.ToString("N0") : "") đ</ins>
+                                    }
+                                    else
+                                    {
+                                        <ins>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</ins>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End main content area -->
+
+<div class="brands-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="brand-wrapper">
+                    <div class="brand-list">
+                        <img src="~/Assets/client/img/brand1.png" alt="">
+                        <img src="~/Assets/client/img/brand2.png" alt="">
+                        <img src="~/Assets/client/img/brand3.png" alt="">
+                        <img src="~/Assets/client/img/brand4.png" alt="">
+                        <img src="~/Assets/client/img/brand5.png" alt="">
+                        <img src="~/Assets/client/img/brand6.png" alt="">
+                        <img src="~/Assets/client/img/brand1.png" alt="">
+                        <img src="~/Assets/client/img/brand2.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End brands area -->
+
+<div class="promo-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo promo1">
+                    <i class="fa fa-refresh"></i>
+                    <p>Đổi trả trong 30 ngày</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo promo2">
+                    <i class="fa fa-truck"></i>
+                    <p>Miễn phí giao hàng</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo promo3">
+                    <i class="fa fa-lock"></i>
+                    <p>Thanh toán trực tiếp</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo promo4">
+                    <i class="fa fa-gift"></i>
+                    <p>Khuyến mãi hấp dẫn</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End promo area -->
